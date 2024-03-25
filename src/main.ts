@@ -35,30 +35,6 @@ const audio = new Audio()
 let CONNECTED = false
 let SAVED = false
 
-// Particles class
-class Circle {
-    size: number
-    x: number
-    y: number
-    color: string
-
-    constructor(size: number, x: number, y: number, color = COLOR) {
-        this.size = size
-        this.x = x
-        this.y = y
-        this.color = color
-    }
-
-    draw() {
-        // console.log({x: this.x, y: this.y, size: this.size});
-        ctx.beginPath()
-        ctx.strokeStyle = this.color
-        ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI)
-        ctx.stroke()
-        ctx.closePath()
-    }
-}
-
 function generateAlignedParticles(cos: number, sin: number, initX: number, initY: number, len: number, isFreq = true) {
     let numbeOfParts = Math.floor(len * MAX_PARTICLES / OUTER_SIZE) + 1
     let distance = 4.2
@@ -170,7 +146,7 @@ function draw(currentMills = 0) {
  
     let ch = cvs.height
     let cw = cvs.width
-    let w = cw / freqDataArray.length
+    // let w = cw / freqDataArray.length
 
     if (COLOR === "black") {
         ctx.fillStyle = "white"
