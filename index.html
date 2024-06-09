@@ -1,29 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + TS</title>
-</head>
-
-<body>
-  <div id="app">
-    <main>
-      <div id="input">
-        <p>Choose Audio</p>
-        <input type="file" name="" id="audioInput">
+  <body>
+    <div id="input">
+      <p>Choose Audio</p>
+      <input type="file" name="" id="audioInput" />
+      <div class="source-wrapper">
+        <h3 class="source-header">Visualize system audio</h3>
+        <p
+          style="
+            margin-top: 5px;
+            font-size: small;
+            color: black;
+            font-family: sans-serif;
+          "
+        >
+          For this to work, you need to use third party software, like
+          Blackhole.
+        </p>
+        <ul class="source-list">
+          <li>
+            <!-- <label for="audio1">System audio</label> -->
+            <button id="audio-btn">Visualize system audio</button>
+          </li>
+        </ul>
       </div>
-    </main>
+    </div>
+    <!-- <main></main> -->
     <button id="save">Save Playing!</button>
     <label for="theme" id="theme-label">
-      <input type="checkbox" name="" checked id="theme">
+      <input type="checkbox" name="" checked id="theme" />
       <span></span>
     </label>
     <canvas id="canvas"></canvas>
-  </div>
-  <script type="module" src="/src/main.ts"></script>
-</body>
 
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
