@@ -7,9 +7,9 @@ const ctx = cvs.getContext("2d") as CanvasRenderingContext2D;
 let lastMills = 0;
 let runAfterMills = 0;
 let SIZE = 40;
-let PSIZE = 2.5;
-let MAX_PARTICLES = 30;
-let OUTER_SIZE = 200;
+let PSIZE = 2.2;
+let MAX_PARTICLES = 40;
+let OUTER_SIZE = 500;
 
 let THEME: "white" | "black" = "black";
 let REVERSE_THEME = THEME === "black" ? "white" : "black";
