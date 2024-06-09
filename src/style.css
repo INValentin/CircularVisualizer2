@@ -40,6 +40,10 @@ button {
   border: 2px solid #113;
 }
 
+button:hover {
+  background-color: #ddd;
+}
+
 #input p {
   color: #334;
   margin-bottom: 0.25rem;
