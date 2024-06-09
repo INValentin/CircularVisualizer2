@@ -6,7 +6,7 @@ const sourcesListEl = document.querySelector(".source-list");
 const ctx = cvs.getContext("2d") as CanvasRenderingContext2D;
 let lastMills = 0;
 let runAfterMills = 0;
-let SIZE = 90;
+let SIZE = 40;
 let PSIZE = 2.5;
 let MAX_PARTICLES = 30;
 let OUTER_SIZE = 200;
@@ -29,9 +29,10 @@ const themeInput = document.getElementById("theme") as HTMLInputElement;
 const audioInput: HTMLInputElement = document.getElementById(
   "audioInput"
 ) as HTMLInputElement;
-const saveBtn: HTMLButtonElement = document.getElementById(
-  "save"
-) as HTMLButtonElement;
+
+// const saveBtn: HTMLButtonElement = document.getElementById(
+//   "save"
+// ) as HTMLButtonElement;
 
 let audioCtx: AudioContext;
 
@@ -222,7 +223,7 @@ function draw(currentMills = 0) {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, cw, ch);
   } else {
-    ctx.clearRect(0, 0, cw + 1, ch + 1);
+    ctx.clearRect(0, 0, cw, ch);
   }
 
   // handle cancelling
@@ -237,9 +238,6 @@ function draw(currentMills = 0) {
   // handle canvas drawing
 
   const drawHalfCirle = (dir = -1, dataArray: Uint8Array, isFreq = true) => {
-    SIZE = isNaN(audio.duration) ? 20 : SIZE;
-    // MAX_PARTICLES = isNaN(audio.duration) ?  : MAX_PARTICLES;
-
     let initX = cw / 2;
     let initY = ch / 2;
     let startAngle = Math.PI / 2;
@@ -296,7 +294,7 @@ function draw(currentMills = 0) {
   //ctx.lineCap = "round"
   ctx.strokeStyle = REVERSE_THEME;
   ctx.lineWidth = 1.2;
-  ctx.font = "900 30px fantasy, serif";
+  ctx.font = "bold 15px 'Open Sans', serif";
   let mins = Math.floor(audio.currentTime / 60);
   let secs = Math.floor((audio.currentTime / 60 - mins) * 60);
   let fmins = Math.floor(isNaN(audio.duration) ? 0 : audio.duration / 60);
@@ -311,16 +309,16 @@ function draw(currentMills = 0) {
     ctx.strokeText(text0, cw / 2 - textW0 / 2, ch / 2);
     ctx.beginPath();
     ctx.strokeStyle = REVERSE_THEME;
-    ctx.lineWidth = 5;
-    ctx.moveTo(cw / 2 - textW01 / 2, ch / 2 + 10);
-    ctx.lineTo(cw / 2 + textW01 / 2, ch / 2 + 10);
+    ctx.lineWidth = 2;
+    ctx.moveTo(cw / 2 - textW01 / 2, ch / 2 + 5);
+    ctx.lineTo(cw / 2 + textW01 / 2, ch / 2 + 5);
     ctx.stroke();
     ctx.closePath();
 
     ctx.lineWidth = 1.2;
-    ctx.strokeText(text01, cw / 2 - textW01 / 2, ch / 2 + 40);
+    ctx.strokeText(text01, cw / 2 - textW01 / 2, ch / 2 + 20);
     ctx.lineWidth = 0.5;
-    ctx.font = "20px comics sans ms, serif";
+    ctx.font = "18px comics sans ms, serif";
     ctx.strokeStyle = COLOR;
     let text = audioInput?.files?.item(0)?.name?.split(".")[0];
     if (text) {
