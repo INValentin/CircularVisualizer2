@@ -26,6 +26,9 @@ function changeTheme(newTheme: "white" | "black") {
 const inputDiv = document.getElementById("input") as HTMLDivElement;
 const themeInput = document.getElementById("theme") as HTMLInputElement;
 
+// Used to detach video as Picture in Picture
+const detachBtn = document.querySelector("#detach-btn") as HTMLInputElement;
+
 const audioInput: HTMLInputElement = document.getElementById(
   "audioInput"
 ) as HTMLInputElement;
@@ -40,6 +43,34 @@ let analyser: AnalyserNode;
 let audio = new Audio();
 let INITIALIZED = false;
 // let SAVED = false;
+
+detachBtn.addEventListener("click", (_) => {
+  const video = document.querySelector("#video-pnp");
+  if (video) {
+    document.body.removeChild(video);
+  } else {
+    handleCreatePictureInPicture();
+  }
+});
+
+function handleCreatePictureInPicture() {
+  const stream = cvs.captureStream();
+
+  const video =
+    (document.querySelector("#video-pnp") as HTMLVideoElement) ||
+    document.createElement("video");
+  video.id = "video-pnp";
+  video.style.display = "none";
+  video.srcObject = stream;
+  document.body.appendChild(video);
+  video.play();
+  video.onloadedmetadata = () => {
+    video.requestPictureInPicture().catch((err) => {
+      alert("Putting video in picture in picture failed!");
+      console.error(err);
+    });
+  };
+}
 
 function generateAlignedParticles(
   cos: number,

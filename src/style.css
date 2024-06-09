@@ -83,13 +83,12 @@ button#save {
   display: none;
 }
 
-label#theme-label {
+label.toggle {
   --w: 60px;
   --h: 20px;
   margin-top: 2px;
   position: absolute;
-  right: 10px;
-  top: 0;
+
   background: #ccc;
   width: var(--w);
   height: calc(var(--h) + 2.3px);
@@ -101,11 +100,21 @@ label#theme-label {
   cursor: pointer;
 }
 
-label#theme-label input {
+label#theme-label {
+  right: 10px;
+  top: 0;
+}
+
+label#detach-label {
+  right: 10px;
+  top: 40px;
+}
+
+label.toggle input {
   display: none;
 }
 
-label#theme-label input + span::after {
+label.toggle input + span::after {
   position: absolute;
   content: "";
   background-color: rgba(34, 34, 34);
@@ -118,8 +127,14 @@ label#theme-label input + span::after {
   transform: translateX(0);
 }
 
-label#theme-label input:checked + span::after {
+label.toggle input:checked + span::after {
   transform: translateX(-92%);
+}
+
+label.pnp {
+  position: absolute;
+  top: 40px;
+  right: 10px;
 }
 
 #canvas {
