@@ -81,13 +81,17 @@ function generateAlignedParticles(
   isFreq = true
 ) {
   let numbeOfParts = Math.floor((len * MAX_PARTICLES) / OUTER_SIZE) + 1;
-  let distance = 4.2;
+
+  let distance = 4.0;
+
   for (let i = 1; i <= numbeOfParts; i++) {
     let x = cos * i * 2.5 * distance;
     let y = sin * i * 2.5 * distance;
 
     let hue = (150 / i) * numbeOfParts + 105;
-    let color = isFreq ? `hsl(${hue}, 100%, 25%)` : `hsl(${hue}, 45%, 85%)`;
+    let color = isFreq
+      ? `hsl(${hue / 2 + 100 * Math.random()}, 100%, 30%)`
+      : `hsl(${hue}, 45%, 87%)`;
 
     if (THEME !== "black") {
       color = isFreq ? `hsl(${hue}, 100%, 20%)` : `hsl(${hue}, 5%, 65%)`;
@@ -98,7 +102,8 @@ function generateAlignedParticles(
     ctx.arc(
       Math.floor(initX + x),
       Math.floor(initY + y),
-      PSIZE,
+      // SIZE(radius) Depends on i, the smaller the i the smaller the radius
+      (i / ((numbeOfParts * 4) / 5) + 0.5) * PSIZE,
       0,
       2 * Math.PI
     );
@@ -177,9 +182,6 @@ async function init() {
   cvs.width = window.innerWidth; //* window.devicePixelRatio;
   cvs.height = window.innerHeight; // * window.devicePixelRatio;
 
-  // SIZE = (.15 * cvs.width) * window.devicePixelRatio
-  // OUTER_SIZE = (.07 * cvs.width) * window.devicePixelRatio
-
   audioInput!.addEventListener("change", (_) => {
     if (!audioInput!.files?.length) return quit();
     let file = audioInput!.files[0];
@@ -214,6 +216,10 @@ window.addEventListener("keyup", (e) => {
       else audio.play();
     }
   }
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  // setupSystemAudio();
 });
 
 // create audio context when user focuses the document
@@ -286,13 +292,11 @@ function draw(currentMills = 0) {
       let initPX = initX + cos * SIZE;
       let initPY = initY + sin * SIZE;
 
-      let freq = (f * OUTER_SIZE) / 255;
+      let freq = (f * (isFreq ? OUTER_SIZE : OUTER_SIZE / 2)) / 255;
 
       generateAlignedParticles(cos, sin, initPX, initPY, freq, isFreq);
     }
   };
-  // ctx.beginPath()
-  //    ctx.moveTo(cw / 2, ch / 2)
 
   drawHalfCirle(1, timeDataArray, false);
   drawHalfCirle(-1, timeDataArray, false);
